@@ -1,8 +1,9 @@
 from random import choice
 from string import ascii_letters, digits
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models import CharField
+from django.db.models import CharField, BooleanField, EmailField, TextField
 
 
 # Create your models here.
@@ -27,3 +28,9 @@ class Url(models.Model):
         while Url.objects.filter(short_name=short_name).exists():
             short_name = self.__token()
         return short_name
+
+
+class Message(models.Model):
+    author = CharField(max_length=255)
+    email = EmailField()
+    message = TextField()

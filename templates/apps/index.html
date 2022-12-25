@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Cortaly - URL Shortner HTML Template</title>
+    <title>URL Shortner</title>
 
     <link rel="stylesheet" href="{% static 'apps/assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'apps/assets/css/all.min.css' %}">
@@ -40,13 +40,13 @@
     <div class="container">
         <div class="header-wrapper">
             <div class="logo">
-                <a href="index-2.html">
+                <a href="{% url 'index_view' %}">
                     <img src="{% static 'apps/assets/images/logo/logo.png' %}" alt="logo">
                 </a>
             </div>
             <ul class="menu">
                 <li>
-                    <a href="index-2.html">Home</a>
+                    <a href="{% url 'index_view' %}">Home</a>
                 </li>
                 <li class="d-sm-none text-center">
                     <a href="sign-in.html" class="header-button active">Login</a>
@@ -60,10 +60,10 @@
                 <span></span>
                 <span></span>
             </div>
-            <div class="header-right">
-                <a href="sign-in.html" class="header-button d-none d-sm-inline-block m-0 active">Login</a>
-                <a href="sign-up.html" class="header-button d-none d-sm-inline-block m-0">Register</a>
-            </div>
+            {#            <div class="header-right">#}
+            {#                <a href="sign-in.html" class="header-button d-none d-sm-inline-block m-0 active">Login</a>#}
+            {#                <a href="sign-up.html" class="header-button d-none d-sm-inline-block m-0">Register</a>#}
+            {#            </div>#}
         </div>
     </div>
 </header>
@@ -84,21 +84,23 @@
     </div>
     <div class="container">
         <div class="banner-content">
-            <h3 class="cate">SHORTEN URLS AND</h3>
+            <h3 class="cate">SHORTEN URLS</h3>
             <h1 class="title">Earn Money</h1>
-            <p>Transforming long, ugly links into Shorten URLs and earn big money. Get paid by every person who visits
+            <p class="cate">Transforming long, ugly links into Shorten URLs and earn big money. Get paid by every person
+                who visits
                 your URLs.</p>
-        </div>Shorten URL Is Just Simple
+        </div>
+        Shorten URL Is Just Simple
 
         <div class="banner-form-group">
             <h3 class="subtitle">Shorten URL Is Just Simple</h3>
-            <h3 class="subtitle" style="color: #4eff4e;"><a href="http://{{ short_name }}">{{ short_name }}</a> </h3>
+            <h3 class="subtitle" style="color: #4eff4e;"><a href="http://{{ short_name }}">{{ short_name }}</a></h3>
 
 
             <form class="banner-form" action="{% url 'index_view' %}" method="post">
                 {% csrf_token %}
                 <input type="url" placeholder="Your URL here" name="long_name" required>
-                <button type="submit">Shorten <i class="flaticon-startup"></i></button>
+                <button type="submit" name="get_url">Shorten <i class="flaticon-startup"></i></button>
             </form>
 
             <div class="banner-counter">
@@ -175,10 +177,11 @@
             <h2 class="title">Get in touch!</h2>
             <p>We thrive to ensure that you get the most out of your experience</p>
         </div>
-        <form class="contact-form" id="contact_form_submit">
+        <form action="{% url 'index_view' %}" method="post" class="contact-form" >
+            {% csrf_token %}
             <div class="form-group">
                 <label for="name">Your Full Name</label>
-                <input type="text" name="name" id="name" placeholder="Enter Your Full Name">
+                <input type="text" name="author" id="name" placeholder="Enter Your Full Name">
             </div>
             <div class="form-group">
                 <label for="email">Your Email</label>
@@ -188,18 +191,18 @@
                 <label for="message">Message</label>
                 <textarea name="message" id="message" placeholder="Enter Your Message"></textarea>
             </div>
-            <div class="form-group check-group">
-                <input type="checkbox" id="check" required>
-                <label for="check">I agree to receive emails, newsletters and promotional messages</label>
-            </div>
+            {#            <div class="form-group check-group">#}
+            {#                <input type="checkbox" id="check" required>#}
+            {#                <label for="check">I agree to receive emails, newsletters and promotional messages</label>#}
+            {#            </div>#}
             <div class="form-group text-center">
-                <button type="submit">Send Message</button>
+                <button type="submit" name="send_message">Send Message</button>
             </div>
         </form>
         <div class="footer-bottom">
             <div class="footer-bottom-area">
                 <div class="left cl-white">
-                    <p>&copy; Copyright 2020 | <a href="#">Cortaly</a> By UIAXIS</p>
+                    send_message <p>&copy; Copyright 2020 | <a href="#">Cortaly</a> By UIAXIS</p>
                 </div>
                 <ul class="social-icons">
                     <li>

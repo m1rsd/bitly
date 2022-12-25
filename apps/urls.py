@@ -5,5 +5,5 @@ from apps.views import IndexFormView, ShortURlView
 
 urlpatterns = [
     path('', IndexFormView.as_view(), name='index_view'),
-    path('<str:name>', ShortURlView.as_view(), name='short_view')
+    path('<str:name>', ShortURlView.as_view(), name='short_view'),
 ]
